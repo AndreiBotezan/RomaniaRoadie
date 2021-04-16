@@ -33,11 +33,11 @@ namespace RomaniaRoadie.Repository
             var customer = dbContext.Customers.FirstOrDefault(x => x.IDCustomer == ID);
             return MapDbObjectToModel(customer);
         }
-        public List<CustomerModel> GetCustomerByUserName(string title)
+        public List<CustomerModel> GetCustomerByUserName(string UserName)
         {
             List<CustomerModel> customersList = new List<CustomerModel>();
             foreach (Customer dbCustomer in dbContext.Customers.Where(
-                x => x.UserName == title))
+                x => x.UserName == UserName))
             {
                 customersList.Add(MapDbObjectToModel(dbCustomer));
             }
@@ -73,7 +73,6 @@ namespace RomaniaRoadie.Repository
                 dbContext.SubmitChanges();
             }
         }
-
         private Customer MapModelToDbObject(CustomerModel customer)
         {
             Customer dbCustomer = new Customer();
@@ -90,7 +89,6 @@ namespace RomaniaRoadie.Repository
             }
             return null;
         }
-
         private CustomerModel MapDbObjectToModel(Customer dbCustomer)
         {
             CustomerModel customer = new CustomerModel();

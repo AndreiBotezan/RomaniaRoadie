@@ -26,6 +26,6 @@ namespace RomaniaRoadie.Models
 
         [StringLength(1000, ErrorMessage = "String too long (max 1000 chars)")]
         public string Details { get; set; }
-        public DateTime OrderDateTime { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
