@@ -28,9 +28,9 @@ namespace RomaniaRoadie.Repository
             }
             return customerOrdersList;
         }
-        public CustomerOrderModel GetCustomerOrderByID(Guid ID)
+        public CustomerOrderModel GetCustomerOrderByID(Guid IDCustomerOrder)
         {
-            var customerOrder = dbContext.CustomerOrders.FirstOrDefault(x => x.IDCustomerOrder == ID);
+            var customerOrder = dbContext.CustomerOrders.FirstOrDefault(x => x.IDCustomerOrder == IDCustomerOrder);
             return MapDbObjectToModel(customerOrder);
         }
         public List<CustomerOrderModel> GetCustomerOrderByCustomer(Guid IDCustomer)

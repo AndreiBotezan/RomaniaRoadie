@@ -29,9 +29,9 @@ namespace RomaniaRoadie.Repository
             return productsList;
         }
 
-        public ProductModel GetProductByID(Guid ID)
+        public ProductModel GetProductByID(Guid IDProduct)
         {
-            var product = dbContext.Products.FirstOrDefault(x => x.IDProduct == ID);
+            var product = dbContext.Products.FirstOrDefault(x => x.IDProduct == IDProduct);
             return MapDbObjectToModel(product);
         }
         public List<ProductModel> GetProductsByManufacturer(string manufacturer)

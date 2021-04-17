@@ -182,8 +182,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CustomerOrderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrderChartController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -270,6 +274,14 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Customer\CreateCustomer.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\OrderChart\CreateOrderChart.cshtml" />
+    <Content Include="Views\OrderChart\Index.cshtml" />
+    <Content Include="Views\CustomerOrder\CreateCustomerOrder.cshtml" />
+    <Content Include="Views\CustomerOrder\Index.cshtml" />
+    <Content Include="Views\Product\CreateProduct.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
