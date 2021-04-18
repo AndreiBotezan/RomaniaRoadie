@@ -15,13 +15,17 @@ namespace RomaniaRoadie.Controllers
         // GET: OrderChart
         public ActionResult Index()
         {
-            return View();
+            List<OrderChartModel> orderChartModels = orderChartRepository.GetAllOrderCharts();
+            
+            return View("Index", orderChartModels);
         }
 
         // GET: OrderChart/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
+            
+            return View("OrderChartDetails", orderChartModel);
         }
 
         // GET: OrderChart/Create
@@ -50,46 +54,51 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: OrderChart/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
+
+            return View("EditOrderChart", orderChartModel);
         }
 
         // POST: OrderChart/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                OrderChartModel orderChartModel = new OrderChartModel();
+                UpdateModel(orderChartModel);
+                orderChartRepository.UpdateOrderChart(orderChartModel);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("EditOrderChart");
             }
         }
 
         // GET: OrderChart/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
+            return View("DeleteOrderChart", orderChartModel);
         }
 
         // POST: OrderChart/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                orderChartRepository.DeleteOrderChart(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteOrderChart");
             }
         }
     }

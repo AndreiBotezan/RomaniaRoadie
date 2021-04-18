@@ -2,8 +2,6 @@
 using RomaniaRoadie.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RomaniaRoadie.Controllers
@@ -14,13 +12,17 @@ namespace RomaniaRoadie.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View();
+            List<ProductModel> products = productRepository.GetAllProducts();
+            
+            return View("Index", products);
         }
 
         // GET: Product/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            ProductModel productModel = productRepository.GetProductByID(id);
+            
+            return View("ProductDetails", productModel);
         }
 
         // GET: Product/Create
@@ -48,46 +50,50 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Product/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            ProductModel productModel = productRepository.GetProductByID(id);
+            return View("EditProduct", productModel);
         }
 
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                ProductModel productModel = new ProductModel();
+                UpdateModel(productModel);
+                productRepository.UpdateProduct(productModel);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("EditProduct");
             }
         }
 
         // GET: Product/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            ProductModel productModel = productRepository.GetProductByID(id);
+            return View("DeleteProduct", productModel);
         }
 
         // POST: Product/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                productRepository.DeleteProduct(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteProduct");
             }
         }
     }

@@ -14,13 +14,17 @@ namespace RomaniaRoadie.Controllers
         // GET: CustomerOrder
         public ActionResult Index()
         {
-            return View();
+            List<CustomerOrderModel> customerOrders = customerOrderRepository.GetAllCustomerOrders();
+            
+            return View("Index", customerOrders);
         }
 
         // GET: CustomerOrder/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
+            
+            return View("CustomerOrderDetails", customerOrderModel);
         }
 
         // GET: CustomerOrder/Create
@@ -49,46 +53,52 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
+
+            return View("EditCustomerOrder", customerOrderModel);
         }
 
         // POST: CustomerOrder/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                CustomerOrderModel customerOrderModel = new CustomerOrderModel();
+                UpdateModel(customerOrderModel);
+                customerOrderRepository.UpdateCustomerOrder(customerOrderModel);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("EditCustomerOrder");
             }
         }
 
         // GET: CustomerOrder/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
+
+            return View("DeleteCustomerOrder", customerOrderModel);
         }
 
         // POST: CustomerOrder/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Guid id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                customerOrderRepository.DeleteCustomerOrder(id);
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("DeleteCustomerOrder");
             }
         }
     }
