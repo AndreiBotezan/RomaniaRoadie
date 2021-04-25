@@ -10,6 +10,7 @@ namespace RomaniaRoadie.Controllers
     {
         ProductRepository productRepository = new ProductRepository();
         // GET: Product
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<ProductModel> products = productRepository.GetAllProducts();
@@ -18,6 +19,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Product/Details/5
+        [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
             ProductModel productModel = productRepository.GetProductByID(id);
@@ -26,6 +28,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View("CreateProduct");
@@ -33,6 +36,7 @@ namespace RomaniaRoadie.Controllers
 
         // POST: Product/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -50,6 +54,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Guid id)
         {
             ProductModel productModel = productRepository.GetProductByID(id);
@@ -57,6 +62,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: Product/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
         {
@@ -75,6 +81,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             ProductModel productModel = productRepository.GetProductByID(id);
@@ -82,6 +89,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: Product/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
         {

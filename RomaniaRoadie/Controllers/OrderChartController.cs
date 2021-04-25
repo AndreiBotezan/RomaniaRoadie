@@ -13,6 +13,7 @@ namespace RomaniaRoadie.Controllers
         private OrderChartRepository orderChartRepository = new OrderChartRepository();
 
         // GET: OrderChart
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             List<OrderChartModel> orderChartModels = orderChartRepository.GetAllOrderCharts();
@@ -21,6 +22,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: OrderChart/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
@@ -29,12 +31,14 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: OrderChart/Create
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             return View("CreateOrderChart");
         }
 
         // POST: OrderChart/Create
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -54,6 +58,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: OrderChart/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
@@ -62,6 +67,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: OrderChart/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
         {
@@ -80,6 +86,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: OrderChart/Delete/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Delete(Guid id)
         {
             OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
@@ -87,6 +94,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: OrderChart/Delete/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
         {

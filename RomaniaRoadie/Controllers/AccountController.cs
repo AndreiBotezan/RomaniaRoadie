@@ -57,6 +57,15 @@ namespace RomaniaRoadie.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+                return RedirectToAction("Index", "Product");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -155,6 +164,7 @@ namespace RomaniaRoadie.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

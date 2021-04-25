@@ -12,6 +12,7 @@ namespace RomaniaRoadie.Controllers
     {
         private CustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
         // GET: CustomerOrder
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             List<CustomerOrderModel> customerOrders = customerOrderRepository.GetAllCustomerOrders();
@@ -20,6 +21,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
@@ -28,12 +30,14 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Create
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             return View("CreateCustomerOrder");
         }
 
         // POST: CustomerOrder/Create
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -53,6 +57,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
@@ -61,6 +66,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: CustomerOrder/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
         {
@@ -79,6 +85,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
@@ -87,6 +94,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: CustomerOrder/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
         {

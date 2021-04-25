@@ -13,6 +13,7 @@ namespace RomaniaRoadie.Controllers
         private CustomerRepository customerRepository = new CustomerRepository();
 
         // GET: Customer
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             List<CustomerModel> customers = customerRepository.GetAllCustomers();
@@ -21,6 +22,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Customer/Details/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             CustomerModel customerModel = customerRepository.GetCustomerByID(id);
@@ -29,12 +31,14 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Customer/Create
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Create()
         {
             return View("CreateCustomer");
         }
 
         // POST: Customer/Create
+        [Authorize(Roles="User, Admin")]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -54,6 +58,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Customer/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
             CustomerModel customerModel = customerRepository.GetCustomerByID(id); 
@@ -61,6 +66,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: Customer/Edit/5
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
         {
@@ -79,6 +85,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Customer/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Guid id)
         {
             CustomerModel customerModel = customerRepository.GetCustomerByID(id);
@@ -86,6 +93,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: Customer/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
         {
