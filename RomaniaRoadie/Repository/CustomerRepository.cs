@@ -8,14 +8,14 @@ namespace RomaniaRoadie.Repository
 {
     public class CustomerRepository
     {
-        private RomaniaRoadieDataContext dbContext;
+        private RomaniaRoadieDataContextDataContext dbContext;
 
         public CustomerRepository()
         {
-            dbContext = new RomaniaRoadieDataContext();
+            dbContext = new RomaniaRoadieDataContextDataContext();
         }
 
-        public CustomerRepository(RomaniaRoadieDataContext _dbContext)
+        public CustomerRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;
         }
@@ -43,6 +43,11 @@ namespace RomaniaRoadie.Repository
             }
             return customersList;
         }
+        public Guid GetCustomerByEmail(string name)
+        {
+            var test = MapDbObjectToModel(dbContext.Customers.FirstOrDefault(x => x.Email == name));
+            return test.IDCustomer;
+        }
         public void InsertCustomer(CustomerModel customer)
         {
             customer.IDCustomer = Guid.NewGuid();
@@ -63,6 +68,8 @@ namespace RomaniaRoadie.Repository
                 dbContext.SubmitChanges();
             }
         }
+
+
         public void DeleteCustomer(Guid ID)
         {
             Customer customerDb = dbContext.Customers

@@ -20,16 +20,30 @@
                 @Html.ActionLink("Romania Roadie", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Products", "Index", "Product")</li>
-                    <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
-                    <li>@Html.ActionLink("Customer Order", "Index", "CustomerOrder")</li>
+                    <li>@Html.ActionLink("Shop", "Index", "Product")</li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Order", "Index", "OrderChart")</li>
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
+                        }
+                        
+                        <li>@Html.ActionLink("Last Orders", "Index", "CustomerOrder")</li>
+                    }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
+
         </div>
     </div>
     <div class="container body-content">

@@ -15,6 +15,8 @@ namespace RomaniaRoadie.Models
         [StringLength(250, ErrorMessage = "String too long (max 250 chars)")]
         public string Model { get; set; }
 
+        public decimal Price { get; set;  }
+
         public string Description { get; set; }
     }
 }

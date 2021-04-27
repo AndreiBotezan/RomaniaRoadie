@@ -8,14 +8,14 @@ namespace RomaniaRoadie.Repository
 {
     public class ProductRepository
     {
-        private RomaniaRoadieDataContext dbContext;
+        private RomaniaRoadieDataContextDataContext dbContext;
 
         public ProductRepository()
         {
-            dbContext = new RomaniaRoadieDataContext();
+            dbContext = new RomaniaRoadieDataContextDataContext();
         }
 
-        public ProductRepository(RomaniaRoadieDataContext _dbContext)
+        public ProductRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;
         }
@@ -60,6 +60,7 @@ namespace RomaniaRoadie.Repository
                 dbProduct.Manufacturer = product.Manufacturer;
                 dbProduct.Model = product.Model;
                 dbProduct.Description = product.Description;
+                dbProduct.Price = product.Price;
 
                 dbContext.SubmitChanges();
             }
@@ -84,6 +85,8 @@ namespace RomaniaRoadie.Repository
                 dbProduct.Manufacturer = product.Manufacturer;
                 dbProduct.Model = product.Model;
                 dbProduct.Description = product.Description;
+                dbProduct.Price = product.Price;
+
                 dbContext.SubmitChanges();
 
                 return dbProduct;
@@ -101,6 +104,8 @@ namespace RomaniaRoadie.Repository
                 product.Manufacturer = dbProduct.Manufacturer;
                 product.Model = dbProduct.Model;
                 product.Description = dbProduct.Description;
+                product.Price = dbProduct.Price;
+
                 dbContext.SubmitChanges();
 
                 return product;

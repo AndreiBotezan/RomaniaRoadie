@@ -23,19 +23,19 @@ namespace RomaniaRoadie.Models.DBObjects
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="RomaniaRoadie")]
-	public partial class RomaniaRoadieDataContext : System.Data.Linq.DataContext
+	public partial class RomaniaRoadieDataContextDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertProduct(Product instance);
-    partial void UpdateProduct(Product instance);
-    partial void DeleteProduct(Product instance);
     partial void InsertCustomerOrder(CustomerOrder instance);
     partial void UpdateCustomerOrder(CustomerOrder instance);
     partial void DeleteCustomerOrder(CustomerOrder instance);
+    partial void InsertProduct(Product instance);
+    partial void UpdateProduct(Product instance);
+    partial void DeleteProduct(Product instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
@@ -44,42 +44,34 @@ namespace RomaniaRoadie.Models.DBObjects
     partial void DeleteOrderChart(OrderChart instance);
     #endregion
 		
-		public RomaniaRoadieDataContext() : 
+		public RomaniaRoadieDataContextDataContext() : 
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["RomaniaRoadieConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public RomaniaRoadieDataContext(string connection) : 
+		public RomaniaRoadieDataContextDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public RomaniaRoadieDataContext(System.Data.IDbConnection connection) : 
+		public RomaniaRoadieDataContextDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public RomaniaRoadieDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public RomaniaRoadieDataContextDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public RomaniaRoadieDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public RomaniaRoadieDataContextDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Product> Products
-		{
-			get
-			{
-				return this.GetTable<Product>();
-			}
 		}
 		
 		public System.Data.Linq.Table<CustomerOrder> CustomerOrders
@@ -87,6 +79,14 @@ namespace RomaniaRoadie.Models.DBObjects
 			get
 			{
 				return this.GetTable<CustomerOrder>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Product> Products
+		{
+			get
+			{
+				return this.GetTable<Product>();
 			}
 		}
 		
@@ -104,168 +104,6 @@ namespace RomaniaRoadie.Models.DBObjects
 			{
 				return this.GetTable<OrderChart>();
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Products")]
-	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _IDProduct;
-		
-		private string _Manufacturer;
-		
-		private string _Model;
-		
-		private string _Description;
-		
-		private EntitySet<OrderChart> _OrderCharts;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDProductChanging(System.Guid value);
-    partial void OnIDProductChanged();
-    partial void OnManufacturerChanging(string value);
-    partial void OnManufacturerChanged();
-    partial void OnModelChanging(string value);
-    partial void OnModelChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    #endregion
-		
-		public Product()
-		{
-			this._OrderCharts = new EntitySet<OrderChart>(new Action<OrderChart>(this.attach_OrderCharts), new Action<OrderChart>(this.detach_OrderCharts));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDProduct", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid IDProduct
-		{
-			get
-			{
-				return this._IDProduct;
-			}
-			set
-			{
-				if ((this._IDProduct != value))
-				{
-					this.OnIDProductChanging(value);
-					this.SendPropertyChanging();
-					this._IDProduct = value;
-					this.SendPropertyChanged("IDProduct");
-					this.OnIDProductChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Manufacturer", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
-		public string Manufacturer
-		{
-			get
-			{
-				return this._Manufacturer;
-			}
-			set
-			{
-				if ((this._Manufacturer != value))
-				{
-					this.OnManufacturerChanging(value);
-					this.SendPropertyChanging();
-					this._Manufacturer = value;
-					this.SendPropertyChanged("Manufacturer");
-					this.OnManufacturerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Model", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
-		public string Model
-		{
-			get
-			{
-				return this._Model;
-			}
-			set
-			{
-				if ((this._Model != value))
-				{
-					this.OnModelChanging(value);
-					this.SendPropertyChanging();
-					this._Model = value;
-					this.SendPropertyChanged("Model");
-					this.OnModelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_OrderChart", Storage="_OrderCharts", ThisKey="IDProduct", OtherKey="IDProduct")]
-		public EntitySet<OrderChart> OrderCharts
-		{
-			get
-			{
-				return this._OrderCharts;
-			}
-			set
-			{
-				this._OrderCharts.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_OrderCharts(OrderChart entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = this;
-		}
-		
-		private void detach_OrderCharts(OrderChart entity)
-		{
-			this.SendPropertyChanging();
-			entity.Product = null;
 		}
 	}
 	
@@ -291,9 +129,9 @@ namespace RomaniaRoadie.Models.DBObjects
 		
 		private System.DateTime _DateCreated;
 		
-		private EntitySet<OrderChart> _OrderCharts;
-		
 		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<OrderChart> _OrderChart;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -319,8 +157,8 @@ namespace RomaniaRoadie.Models.DBObjects
 		
 		public CustomerOrder()
 		{
-			this._OrderCharts = new EntitySet<OrderChart>(new Action<OrderChart>(this.attach_OrderCharts), new Action<OrderChart>(this.detach_OrderCharts));
 			this._Customer = default(EntityRef<Customer>);
+			this._OrderChart = default(EntityRef<OrderChart>);
 			OnCreated();
 		}
 		
@@ -335,7 +173,7 @@ namespace RomaniaRoadie.Models.DBObjects
 			{
 				if ((this._IDCustomerOrder != value))
 				{
-					if (this._Customer.HasLoadedOrAssignedValue)
+					if ((this._Customer.HasLoadedOrAssignedValue || this._OrderChart.HasLoadedOrAssignedValue))
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -488,19 +326,6 @@ namespace RomaniaRoadie.Models.DBObjects
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerOrder_OrderChart", Storage="_OrderCharts", ThisKey="IDCustomerOrder", OtherKey="IDCustomerOrder")]
-		public EntitySet<OrderChart> OrderCharts
-		{
-			get
-			{
-				return this._OrderCharts;
-			}
-			set
-			{
-				this._OrderCharts.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_CustomerOrder", Storage="_Customer", ThisKey="IDCustomerOrder", OtherKey="IDCustomer", IsForeignKey=true)]
 		public Customer Customer
 		{
@@ -535,6 +360,214 @@ namespace RomaniaRoadie.Models.DBObjects
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderChart_CustomerOrder", Storage="_OrderChart", ThisKey="IDCustomerOrder", OtherKey="IDOrderChart", IsForeignKey=true)]
+		public OrderChart OrderChart
+		{
+			get
+			{
+				return this._OrderChart.Entity;
+			}
+			set
+			{
+				OrderChart previousValue = this._OrderChart.Entity;
+				if (((previousValue != value) 
+							|| (this._OrderChart.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OrderChart.Entity = null;
+						previousValue.CustomerOrder = null;
+					}
+					this._OrderChart.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerOrder = this;
+						this._IDCustomerOrder = value.IDOrderChart;
+					}
+					else
+					{
+						this._IDCustomerOrder = default(System.Guid);
+					}
+					this.SendPropertyChanged("OrderChart");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Products")]
+	public partial class Product : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IDProduct;
+		
+		private string _Manufacturer;
+		
+		private string _Model;
+		
+		private decimal _Price;
+		
+		private string _Description;
+		
+		private EntitySet<OrderChart> _OrderCharts;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDProductChanging(System.Guid value);
+    partial void OnIDProductChanged();
+    partial void OnManufacturerChanging(string value);
+    partial void OnManufacturerChanged();
+    partial void OnModelChanging(string value);
+    partial void OnModelChanged();
+    partial void OnPriceChanging(decimal value);
+    partial void OnPriceChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public Product()
+		{
+			this._OrderCharts = new EntitySet<OrderChart>(new Action<OrderChart>(this.attach_OrderCharts), new Action<OrderChart>(this.detach_OrderCharts));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDProduct", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDProduct
+		{
+			get
+			{
+				return this._IDProduct;
+			}
+			set
+			{
+				if ((this._IDProduct != value))
+				{
+					this.OnIDProductChanging(value);
+					this.SendPropertyChanging();
+					this._IDProduct = value;
+					this.SendPropertyChanged("IDProduct");
+					this.OnIDProductChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Manufacturer", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string Manufacturer
+		{
+			get
+			{
+				return this._Manufacturer;
+			}
+			set
+			{
+				if ((this._Manufacturer != value))
+				{
+					this.OnManufacturerChanging(value);
+					this.SendPropertyChanging();
+					this._Manufacturer = value;
+					this.SendPropertyChanged("Manufacturer");
+					this.OnManufacturerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Model", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string Model
+		{
+			get
+			{
+				return this._Model;
+			}
+			set
+			{
+				if ((this._Model != value))
+				{
+					this.OnModelChanging(value);
+					this.SendPropertyChanging();
+					this._Model = value;
+					this.SendPropertyChanged("Model");
+					this.OnModelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money NOT NULL")]
+		public decimal Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="VarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Product_OrderChart", Storage="_OrderCharts", ThisKey="IDProduct", OtherKey="IDProduct")]
+		public EntitySet<OrderChart> OrderCharts
+		{
+			get
+			{
+				return this._OrderCharts;
+			}
+			set
+			{
+				this._OrderCharts.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -558,13 +591,13 @@ namespace RomaniaRoadie.Models.DBObjects
 		private void attach_OrderCharts(OrderChart entity)
 		{
 			this.SendPropertyChanging();
-			entity.CustomerOrder = this;
+			entity.Product = this;
 		}
 		
 		private void detach_OrderCharts(OrderChart entity)
 		{
 			this.SendPropertyChanging();
-			entity.CustomerOrder = null;
+			entity.Product = null;
 		}
 	}
 	
@@ -770,7 +803,9 @@ namespace RomaniaRoadie.Models.DBObjects
 		
 		private System.Guid _IDProduct;
 		
-		private decimal _Price;
+		private System.Guid _IDCustomer;
+		
+		private decimal _TotalPrice;
 		
 		private int _Quantity;
 		
@@ -788,8 +823,10 @@ namespace RomaniaRoadie.Models.DBObjects
     partial void OnIDCustomerOrderChanged();
     partial void OnIDProductChanging(System.Guid value);
     partial void OnIDProductChanged();
-    partial void OnPriceChanging(decimal value);
-    partial void OnPriceChanged();
+    partial void OnIDCustomerChanging(System.Guid value);
+    partial void OnIDCustomerChanged();
+    partial void OnTotalPriceChanging(decimal value);
+    partial void OnTotalPriceChanged();
     partial void OnQuantityChanging(int value);
     partial void OnQuantityChanged();
     #endregion
@@ -832,10 +869,6 @@ namespace RomaniaRoadie.Models.DBObjects
 			{
 				if ((this._IDCustomerOrder != value))
 				{
-					if (this._CustomerOrder.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnIDCustomerOrderChanging(value);
 					this.SendPropertyChanging();
 					this._IDCustomerOrder = value;
@@ -869,22 +902,42 @@ namespace RomaniaRoadie.Models.DBObjects
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Money NOT NULL")]
-		public decimal Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid IDCustomer
 		{
 			get
 			{
-				return this._Price;
+				return this._IDCustomer;
 			}
 			set
 			{
-				if ((this._Price != value))
+				if ((this._IDCustomer != value))
 				{
-					this.OnPriceChanging(value);
+					this.OnIDCustomerChanging(value);
 					this.SendPropertyChanging();
-					this._Price = value;
-					this.SendPropertyChanged("Price");
-					this.OnPriceChanged();
+					this._IDCustomer = value;
+					this.SendPropertyChanged("IDCustomer");
+					this.OnIDCustomerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalPrice", DbType="Money NOT NULL")]
+		public decimal TotalPrice
+		{
+			get
+			{
+				return this._TotalPrice;
+			}
+			set
+			{
+				if ((this._TotalPrice != value))
+				{
+					this.OnTotalPriceChanging(value);
+					this.SendPropertyChanging();
+					this._TotalPrice = value;
+					this.SendPropertyChanged("TotalPrice");
+					this.OnTotalPriceChanged();
 				}
 			}
 		}
@@ -909,7 +962,7 @@ namespace RomaniaRoadie.Models.DBObjects
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="CustomerOrder_OrderChart", Storage="_CustomerOrder", ThisKey="IDCustomerOrder", OtherKey="IDCustomerOrder", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderChart_CustomerOrder", Storage="_CustomerOrder", ThisKey="IDOrderChart", OtherKey="IDCustomerOrder", IsUnique=true, IsForeignKey=false)]
 		public CustomerOrder CustomerOrder
 		{
 			get
@@ -926,17 +979,12 @@ namespace RomaniaRoadie.Models.DBObjects
 					if ((previousValue != null))
 					{
 						this._CustomerOrder.Entity = null;
-						previousValue.OrderCharts.Remove(this);
+						previousValue.OrderChart = null;
 					}
 					this._CustomerOrder.Entity = value;
 					if ((value != null))
 					{
-						value.OrderCharts.Add(this);
-						this._IDCustomerOrder = value.IDCustomerOrder;
-					}
-					else
-					{
-						this._IDCustomerOrder = default(System.Guid);
+						value.OrderChart = this;
 					}
 					this.SendPropertyChanged("CustomerOrder");
 				}

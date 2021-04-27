@@ -13,12 +13,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.IDCustomerOrder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDCustomer)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Adress)
         </th>
         <th>
@@ -41,12 +35,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDCustomerOrder)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDCustomer)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Adress)
         </td>

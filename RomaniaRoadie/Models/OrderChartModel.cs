@@ -8,11 +8,12 @@ namespace RomaniaRoadie.Models
         public Guid IDOrderChart { get; set; }
         public Guid IDCustomerOrder { get; set; }
         public Guid IDProduct { get; set; }
+        public Guid IDCustomer { get; set; }
 
         [Required(ErrorMessage = "Mandatory field")]
         public int Quantity { get; set; }
 
         [Required(ErrorMessage = "Mandatory field")]
-        public decimal Price { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

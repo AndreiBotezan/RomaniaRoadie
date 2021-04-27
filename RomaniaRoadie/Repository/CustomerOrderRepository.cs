@@ -9,13 +9,14 @@ namespace RomaniaRoadie.Repository
 {
     public class CustomerOrderRepository
     {
-        private RomaniaRoadieDataContext dbContext;
+        private RomaniaRoadieDataContextDataContext dbContext;
+        private OrderChartRepository orderChartRepository = new OrderChartRepository();
 
         public CustomerOrderRepository()
         {
-            dbContext = new RomaniaRoadieDataContext();
+            dbContext = new RomaniaRoadieDataContextDataContext();
         }
-        public CustomerOrderRepository(RomaniaRoadieDataContext _dbContext)
+        public CustomerOrderRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;
         }
@@ -112,6 +113,22 @@ namespace RomaniaRoadie.Repository
                 return dbCustomerOrder;
             }
             return null;
+        }
+        public Guid GetIDCustomerOrder()
+        {
+            CustomerOrderModel customerOrderModel = MapDbObjectToModel(dbContext.CustomerOrders.OrderByDescending(x => x.DateCreated).FirstOrDefault());
+            if (customerOrderModel == null)
+            {
+                return new Guid();
+            }
+            else
+            {
+                if (customerOrderModel.IDCustomerOrder == orderChartRepository.GetLastOrder())
+                {
+                    return new Guid();
+                }
+                return orderChartRepository.GetLastOrder();
+            }
         }
     }
 }

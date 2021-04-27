@@ -11,18 +11,23 @@ namespace RomaniaRoadie.Controllers
     public class OrderChartController : Controller
     {
         private OrderChartRepository orderChartRepository = new OrderChartRepository();
+        private ProductRepository productRepository = new ProductRepository();
+        private CustomerRepository customerRepository = new CustomerRepository();
+        private CustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
 
         // GET: OrderChart
-        [Authorize(Roles = "User, Admin")]
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            List<OrderChartModel> orderChartModels = orderChartRepository.GetAllOrderCharts();
+            Guid id = customerRepository.GetCustomerByEmail(User.Identity.Name);
+
+            List<OrderChartModel> orderChartModels = orderChartRepository.GetAllOrderCharts(id);
             
             return View("Index", orderChartModels);
         }
 
         // GET: OrderChart/Details/5
-        [Authorize(Roles = "User, Admin")]
+        [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
             OrderChartModel orderChartModel = orderChartRepository.GetOrderChartByID(id);
@@ -40,12 +45,17 @@ namespace RomaniaRoadie.Controllers
         // POST: OrderChart/Create
         [Authorize(Roles = "User, Admin")]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Guid id, FormCollection collection)
         {
             try
             {
                 OrderChartModel orderChartModel = new OrderChartModel();
                 UpdateModel(orderChartModel);
+
+                orderChartModel.TotalPrice = orderChartModel.Quantity * productRepository.GetProductByID(id).Price;
+                orderChartModel.IDProduct = id;
+                orderChartModel.IDCustomer = customerRepository.GetCustomerByEmail(User.Identity.Name);
+                orderChartModel.IDCustomerOrder = customerOrderRepository.GetIDCustomerOrder();
 
                 orderChartRepository.InsertOrderChart(orderChartModel);
 
@@ -56,7 +66,6 @@ namespace RomaniaRoadie.Controllers
                 return View("CreateOrderChart");
             }
         }
-
         // GET: OrderChart/Edit/5
         [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
@@ -75,8 +84,11 @@ namespace RomaniaRoadie.Controllers
             {
                 OrderChartModel orderChartModel = new OrderChartModel();
                 UpdateModel(orderChartModel);
-                orderChartRepository.UpdateOrderChart(orderChartModel);
+                
+                orderChartModel.TotalPrice = orderChartModel.Quantity * productRepository.GetProductByID(orderChartModel.IDProduct).Price;
 
+                orderChartRepository.UpdateOrderChart(orderChartModel);
+                
                 return RedirectToAction("Index");
             }
             catch
@@ -109,5 +121,6 @@ namespace RomaniaRoadie.Controllers
                 return View("DeleteOrderChart");
             }
         }
+        
     }
 }

@@ -12,7 +12,7 @@ namespace RomaniaRoadie.Controllers
     {
         private CustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
         // GET: CustomerOrder
-        [Authorize(Roles = "User, Admin")]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<CustomerOrderModel> customerOrders = customerOrderRepository.GetAllCustomerOrders();
@@ -21,7 +21,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Details/5
-        [Authorize(Roles = "User, Admin")]
+        [AllowAnonymous]
         public ActionResult Details(Guid id)
         {
             CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);

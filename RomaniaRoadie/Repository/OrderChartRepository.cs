@@ -9,21 +9,21 @@ namespace RomaniaRoadie.Repository
 {
     public class OrderChartRepository
     {
-        private RomaniaRoadieDataContext dbContext;
+        private RomaniaRoadieDataContextDataContext dbContext;
 
         public OrderChartRepository()
         {
-            dbContext = new RomaniaRoadieDataContext();
+            dbContext = new RomaniaRoadieDataContextDataContext();
         }
 
-        public OrderChartRepository(RomaniaRoadieDataContext _dbContext)
+        public OrderChartRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;
         }
-        public List<OrderChartModel> GetAllOrderCharts()
+        public List<OrderChartModel> GetAllOrderCharts(Guid ID)
         {
             List<OrderChartModel> orderChartList = new List<OrderChartModel>();
-            foreach (OrderChart dbOrderChart in dbContext.OrderCharts)
+            foreach (OrderChart dbOrderChart in dbContext.OrderCharts.Where(x => x.IDCustomer == ID))
             {
                 orderChartList.Add(MapDbObjectToModel(dbOrderChart));
             }
@@ -56,8 +56,9 @@ namespace RomaniaRoadie.Repository
                 dbOrderChart.IDOrderChart = orderChart.IDOrderChart;
                 dbOrderChart.IDCustomerOrder = orderChart.IDCustomerOrder;
                 dbOrderChart.IDProduct = orderChart.IDProduct;
+                dbOrderChart.IDCustomer = orderChart.IDCustomer;
                 dbOrderChart.Quantity = orderChart.Quantity;
-                dbOrderChart.Price = orderChart.Price;
+                dbOrderChart.TotalPrice = orderChart.TotalPrice;
                 dbContext.SubmitChanges();
             }
         }
@@ -79,8 +80,9 @@ namespace RomaniaRoadie.Repository
                 dbOrderChart.IDOrderChart = orderChart.IDOrderChart;
                 dbOrderChart.IDCustomerOrder = orderChart.IDCustomerOrder;
                 dbOrderChart.IDProduct = orderChart.IDProduct;
+                dbOrderChart.IDCustomer = orderChart.IDCustomer;
                 dbOrderChart.Quantity = orderChart.Quantity;
-                dbOrderChart.Price = orderChart.Price;
+                dbOrderChart.TotalPrice = orderChart.TotalPrice;
                 dbContext.SubmitChanges();
 
                 return dbOrderChart;
@@ -96,13 +98,18 @@ namespace RomaniaRoadie.Repository
                 orderChart.IDOrderChart = dbOrderChart.IDOrderChart;
                 orderChart.IDCustomerOrder = dbOrderChart.IDCustomerOrder;
                 orderChart.IDProduct = dbOrderChart.IDProduct;
+                orderChart.IDCustomer = dbOrderChart.IDCustomer;
                 orderChart.Quantity = dbOrderChart.Quantity;
-                orderChart.Price = dbOrderChart.Price;
+                orderChart.TotalPrice = dbOrderChart.TotalPrice;
                 dbContext.SubmitChanges();
 
                 return orderChart;
             }
             return null;
+        }
+        public Guid GetLastOrder()
+        {
+            return dbContext.OrderCharts.OrderByDescending(x => x.IDOrderChart).FirstOrDefault().IDCustomerOrder;
         }
     }
 }
