@@ -22,8 +22,21 @@ namespace RomaniaRoadie.Controllers
             Guid id = customerRepository.GetCustomerByEmail(User.Identity.Name);
 
             List<OrderChartModel> orderChartModels = orderChartRepository.GetAllOrderCharts(id);
-            
-            return View("Index", orderChartModels);
+            List<OrderViewModel> orderViewModels = new List<OrderViewModel>();
+
+            foreach(OrderChartModel item in orderChartModels)
+            {
+                OrderViewModel orderViewModel = new OrderViewModel();
+                orderViewModel.IdOrderChart = item.IDOrderChart;
+                orderViewModel.Model = productRepository.GetProductByID(item.IDProduct).Model;
+                orderViewModel.Manufacturer = productRepository.GetProductByID(item.IDProduct).Manufacturer;
+                orderViewModel.Quantity = item.Quantity;
+                orderViewModel.TotalPrice = item.TotalPrice;
+
+                orderViewModels.Add(orderViewModel);
+            }
+
+            return View("Index", orderViewModels);
         }
 
         // GET: OrderChart/Details/5

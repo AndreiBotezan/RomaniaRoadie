@@ -46,7 +46,6 @@ namespace RomaniaRoadie.Repository
         }
         public void InsertCustomerOrder(CustomerOrderModel customerOrder)
         {
-            customerOrder.IDCustomerOrder = Guid.NewGuid();
             dbContext.CustomerOrders.InsertOnSubmit(MapModelToDbObject(customerOrder));
             dbContext.SubmitChanges();
         }
@@ -60,9 +59,12 @@ namespace RomaniaRoadie.Repository
                 dbCustomerOrder.IDCustomer = customerOrder.IDCustomer;
                 dbCustomerOrder.Adress = customerOrder.Adress;
                 dbCustomerOrder.City = customerOrder.City;
+                dbCustomerOrder.State = customerOrder.State;
                 dbCustomerOrder.Phone = customerOrder.Phone;
                 dbCustomerOrder.Details = customerOrder.Details;
                 dbCustomerOrder.DateCreated = customerOrder.DateCreated;
+                dbCustomerOrder.OrderTotal = customerOrder.OrderTotal;
+
                 dbContext.SubmitChanges();
             }
         }
@@ -76,7 +78,7 @@ namespace RomaniaRoadie.Repository
                 dbContext.SubmitChanges();
             }
         }
-        private CustomerOrderModel MapDbObjectToModel(CustomerOrder dbCustomerOrder)
+        public CustomerOrderModel MapDbObjectToModel(CustomerOrder dbCustomerOrder)
         {
             CustomerOrderModel customerOrder = new CustomerOrderModel();
 
@@ -86,29 +88,30 @@ namespace RomaniaRoadie.Repository
                 customerOrder.IDCustomer = dbCustomerOrder.IDCustomer;
                 customerOrder.Adress = dbCustomerOrder.Adress;
                 customerOrder.City = dbCustomerOrder.City;
+                customerOrder.State = dbCustomerOrder.State;
                 customerOrder.Phone = dbCustomerOrder.Phone;
                 customerOrder.Details = dbCustomerOrder.Details;
                 customerOrder.DateCreated = dbCustomerOrder.DateCreated;
-                dbContext.SubmitChanges();
+                customerOrder.OrderTotal = dbCustomerOrder.OrderTotal;
 
                 return customerOrder;
             }
             return null;
         }
-        private CustomerOrder MapModelToDbObject(CustomerOrderModel customerOrder)
+        public CustomerOrder MapModelToDbObject(CustomerOrderModel customerOrder)
         {
-            CustomerOrder dbCustomerOrder = dbContext.CustomerOrders
-                .FirstOrDefault(x => x.IDCustomerOrder == customerOrder.IDCustomerOrder);
-            if (dbCustomerOrder != null)
+            CustomerOrder dbCustomerOrder = new CustomerOrder();
+            if (customerOrder != null)
             {
                 dbCustomerOrder.IDCustomerOrder = customerOrder.IDCustomerOrder;
                 dbCustomerOrder.IDCustomer = customerOrder.IDCustomer;
                 dbCustomerOrder.Adress = customerOrder.Adress;
                 dbCustomerOrder.City = customerOrder.City;
+                dbCustomerOrder.State = customerOrder.State;
                 dbCustomerOrder.Phone = customerOrder.Phone;
                 dbCustomerOrder.Details = customerOrder.Details;
                 dbCustomerOrder.DateCreated = customerOrder.DateCreated;
-                dbContext.SubmitChanges();
+                dbCustomerOrder.OrderTotal = customerOrder.OrderTotal;
 
                 return dbCustomerOrder;
             }
@@ -119,13 +122,13 @@ namespace RomaniaRoadie.Repository
             CustomerOrderModel customerOrderModel = MapDbObjectToModel(dbContext.CustomerOrders.OrderByDescending(x => x.DateCreated).FirstOrDefault());
             if (customerOrderModel == null)
             {
-                return new Guid();
+                return Guid.NewGuid();
             }
             else
             {
                 if (customerOrderModel.IDCustomerOrder == orderChartRepository.GetLastOrder())
                 {
-                    return new Guid();
+                    return Guid.NewGuid();
                 }
                 return orderChartRepository.GetLastOrder();
             }

@@ -1,18 +1,20 @@
-﻿@model IEnumerable<RomaniaRoadie.Models.OrderChartModel>
+﻿@model IEnumerable<RomaniaRoadie.Models.OrderViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Shopping cart</h2>
-
+<h2>Cart</h2>
 
 <table class="table">
     <tr>
 
         <th>
-            @Html.DisplayNameFor(model => model.IDProduct)
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Quantity)
@@ -23,24 +25,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.IDProduct)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDOrderChart }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDOrderChart }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDOrderChart })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdOrderChart }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdOrderChart }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdOrderChart })
+            </td>
+        </tr>
+    }
 
 </table>
+<div style="text-align-last:right; padding-right: 8%">
+    <button style="font-size:14px;">@Html.ActionLink("Submit cart", "Create", "CustomerOrder")</button>
+</div>

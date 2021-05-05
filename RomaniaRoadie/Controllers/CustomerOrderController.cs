@@ -10,9 +10,13 @@ namespace RomaniaRoadie.Controllers
 {
     public class CustomerOrderController : Controller
     {
+        private ProductRepository productRepository = new ProductRepository();
+        private CustomerRepository customerRepository = new CustomerRepository();
+        private OrderChartRepository orderChartRepository = new OrderChartRepository();
         private CustomerOrderRepository customerOrderRepository = new CustomerOrderRepository();
+
         // GET: CustomerOrder
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Index()
         {
             List<CustomerOrderModel> customerOrders = customerOrderRepository.GetAllCustomerOrders();
@@ -21,7 +25,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: CustomerOrder/Details/5
-        [AllowAnonymous]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Details(Guid id)
         {
             CustomerOrderModel customerOrderModel = customerOrderRepository.GetCustomerOrderByID(id);
@@ -46,7 +50,11 @@ namespace RomaniaRoadie.Controllers
                 CustomerOrderModel customerOrderModel = new CustomerOrderModel();
                 UpdateModel(customerOrderModel);
 
-                customerOrderRepository.UpdateCustomerOrder(customerOrderModel);
+                customerOrderModel.IDCustomerOrder = orderChartRepository.GetLastOrder();
+                customerOrderModel.IDCustomer = customerRepository.GetCustomerByEmail(User.Identity.Name);
+                customerOrderModel.DateCreated = DateTime.Now;
+                customerOrderModel.OrderTotal = orderChartRepository.GetOrderTotal(customerOrderModel.IDCustomer);
+                customerOrderRepository.InsertCustomerOrder(customerOrderModel);
 
                 return RedirectToAction("Index");
             }

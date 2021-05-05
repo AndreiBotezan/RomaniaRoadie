@@ -30,12 +30,12 @@ namespace RomaniaRoadie.Models.DBObjects
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertCustomerOrder(CustomerOrder instance);
-    partial void UpdateCustomerOrder(CustomerOrder instance);
-    partial void DeleteCustomerOrder(CustomerOrder instance);
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
+    partial void InsertCustomerOrder(CustomerOrder instance);
+    partial void UpdateCustomerOrder(CustomerOrder instance);
+    partial void DeleteCustomerOrder(CustomerOrder instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
@@ -74,19 +74,19 @@ namespace RomaniaRoadie.Models.DBObjects
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<CustomerOrder> CustomerOrders
-		{
-			get
-			{
-				return this.GetTable<CustomerOrder>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Product> Products
 		{
 			get
 			{
 				return this.GetTable<Product>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CustomerOrder> CustomerOrders
+		{
+			get
+			{
+				return this.GetTable<CustomerOrder>();
 			}
 		}
 		
@@ -103,314 +103,6 @@ namespace RomaniaRoadie.Models.DBObjects
 			get
 			{
 				return this.GetTable<OrderChart>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CustomerOrders")]
-	public partial class CustomerOrder : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _IDCustomerOrder;
-		
-		private System.Guid _IDCustomer;
-		
-		private string _Adress;
-		
-		private string _City;
-		
-		private string _State;
-		
-		private string _Phone;
-		
-		private string _Details;
-		
-		private System.DateTime _DateCreated;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<OrderChart> _OrderChart;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDCustomerOrderChanging(System.Guid value);
-    partial void OnIDCustomerOrderChanged();
-    partial void OnIDCustomerChanging(System.Guid value);
-    partial void OnIDCustomerChanged();
-    partial void OnAdressChanging(string value);
-    partial void OnAdressChanged();
-    partial void OnCityChanging(string value);
-    partial void OnCityChanged();
-    partial void OnStateChanging(string value);
-    partial void OnStateChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnDetailsChanging(string value);
-    partial void OnDetailsChanged();
-    partial void OnDateCreatedChanging(System.DateTime value);
-    partial void OnDateCreatedChanged();
-    #endregion
-		
-		public CustomerOrder()
-		{
-			this._Customer = default(EntityRef<Customer>);
-			this._OrderChart = default(EntityRef<OrderChart>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomerOrder", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid IDCustomerOrder
-		{
-			get
-			{
-				return this._IDCustomerOrder;
-			}
-			set
-			{
-				if ((this._IDCustomerOrder != value))
-				{
-					if ((this._Customer.HasLoadedOrAssignedValue || this._OrderChart.HasLoadedOrAssignedValue))
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnIDCustomerOrderChanging(value);
-					this.SendPropertyChanging();
-					this._IDCustomerOrder = value;
-					this.SendPropertyChanged("IDCustomerOrder");
-					this.OnIDCustomerOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid IDCustomer
-		{
-			get
-			{
-				return this._IDCustomer;
-			}
-			set
-			{
-				if ((this._IDCustomer != value))
-				{
-					this.OnIDCustomerChanging(value);
-					this.SendPropertyChanging();
-					this._IDCustomer = value;
-					this.SendPropertyChanged("IDCustomer");
-					this.OnIDCustomerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adress", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
-		public string Adress
-		{
-			get
-			{
-				return this._Adress;
-			}
-			set
-			{
-				if ((this._Adress != value))
-				{
-					this.OnAdressChanging(value);
-					this.SendPropertyChanging();
-					this._Adress = value;
-					this.SendPropertyChanged("Adress");
-					this.OnAdressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
-		public string City
-		{
-			get
-			{
-				return this._City;
-			}
-			set
-			{
-				if ((this._City != value))
-				{
-					this.OnCityChanging(value);
-					this.SendPropertyChanging();
-					this._City = value;
-					this.SendPropertyChanged("City");
-					this.OnCityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string State
-		{
-			get
-			{
-				return this._State;
-			}
-			set
-			{
-				if ((this._State != value))
-				{
-					this.OnStateChanging(value);
-					this.SendPropertyChanging();
-					this._State = value;
-					this.SendPropertyChanged("State");
-					this.OnStateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
-		public string Details
-		{
-			get
-			{
-				return this._Details;
-			}
-			set
-			{
-				if ((this._Details != value))
-				{
-					this.OnDetailsChanging(value);
-					this.SendPropertyChanging();
-					this._Details = value;
-					this.SendPropertyChanged("Details");
-					this.OnDetailsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
-		public System.DateTime DateCreated
-		{
-			get
-			{
-				return this._DateCreated;
-			}
-			set
-			{
-				if ((this._DateCreated != value))
-				{
-					this.OnDateCreatedChanging(value);
-					this.SendPropertyChanging();
-					this._DateCreated = value;
-					this.SendPropertyChanged("DateCreated");
-					this.OnDateCreatedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_CustomerOrder", Storage="_Customer", ThisKey="IDCustomerOrder", OtherKey="IDCustomer", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.CustomerOrder = null;
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerOrder = this;
-						this._IDCustomerOrder = value.IDCustomer;
-					}
-					else
-					{
-						this._IDCustomerOrder = default(System.Guid);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderChart_CustomerOrder", Storage="_OrderChart", ThisKey="IDCustomerOrder", OtherKey="IDOrderChart", IsForeignKey=true)]
-		public OrderChart OrderChart
-		{
-			get
-			{
-				return this._OrderChart.Entity;
-			}
-			set
-			{
-				OrderChart previousValue = this._OrderChart.Entity;
-				if (((previousValue != value) 
-							|| (this._OrderChart.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._OrderChart.Entity = null;
-						previousValue.CustomerOrder = null;
-					}
-					this._OrderChart.Entity = value;
-					if ((value != null))
-					{
-						value.CustomerOrder = this;
-						this._IDCustomerOrder = value.IDOrderChart;
-					}
-					else
-					{
-						this._IDCustomerOrder = default(System.Guid);
-					}
-					this.SendPropertyChanged("OrderChart");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -601,6 +293,342 @@ namespace RomaniaRoadie.Models.DBObjects
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CustomerOrders")]
+	public partial class CustomerOrder : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IDCustomerOrder;
+		
+		private System.Guid _IDCustomer;
+		
+		private string _Adress;
+		
+		private string _City;
+		
+		private string _State;
+		
+		private string _Phone;
+		
+		private string _Details;
+		
+		private System.DateTime _DateCreated;
+		
+		private decimal _OrderTotal;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<OrderChart> _OrderChart;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDCustomerOrderChanging(System.Guid value);
+    partial void OnIDCustomerOrderChanged();
+    partial void OnIDCustomerChanging(System.Guid value);
+    partial void OnIDCustomerChanged();
+    partial void OnAdressChanging(string value);
+    partial void OnAdressChanged();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
+    partial void OnStateChanging(string value);
+    partial void OnStateChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnDetailsChanging(string value);
+    partial void OnDetailsChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
+    partial void OnOrderTotalChanging(decimal value);
+    partial void OnOrderTotalChanged();
+    #endregion
+		
+		public CustomerOrder()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			this._OrderChart = default(EntityRef<OrderChart>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomerOrder", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IDCustomerOrder
+		{
+			get
+			{
+				return this._IDCustomerOrder;
+			}
+			set
+			{
+				if ((this._IDCustomerOrder != value))
+				{
+					if (this._OrderChart.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDCustomerOrderChanging(value);
+					this.SendPropertyChanging();
+					this._IDCustomerOrder = value;
+					this.SendPropertyChanged("IDCustomerOrder");
+					this.OnIDCustomerOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDCustomer", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid IDCustomer
+		{
+			get
+			{
+				return this._IDCustomer;
+			}
+			set
+			{
+				if ((this._IDCustomer != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnIDCustomerChanging(value);
+					this.SendPropertyChanging();
+					this._IDCustomer = value;
+					this.SendPropertyChanged("IDCustomer");
+					this.OnIDCustomerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adress", DbType="VarChar(1000) NOT NULL", CanBeNull=false)]
+		public string Adress
+		{
+			get
+			{
+				return this._Adress;
+			}
+			set
+			{
+				if ((this._Adress != value))
+				{
+					this.OnAdressChanging(value);
+					this.SendPropertyChanging();
+					this._Adress = value;
+					this.SendPropertyChanged("Adress");
+					this.OnAdressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_State", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string State
+		{
+			get
+			{
+				return this._State;
+			}
+			set
+			{
+				if ((this._State != value))
+				{
+					this.OnStateChanging(value);
+					this.SendPropertyChanging();
+					this._State = value;
+					this.SendPropertyChanged("State");
+					this.OnStateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Details", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string Details
+		{
+			get
+			{
+				return this._Details;
+			}
+			set
+			{
+				if ((this._Details != value))
+				{
+					this.OnDetailsChanging(value);
+					this.SendPropertyChanging();
+					this._Details = value;
+					this.SendPropertyChanged("Details");
+					this.OnDetailsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderTotal", DbType="Money NOT NULL")]
+		public decimal OrderTotal
+		{
+			get
+			{
+				return this._OrderTotal;
+			}
+			set
+			{
+				if ((this._OrderTotal != value))
+				{
+					this.OnOrderTotalChanging(value);
+					this.SendPropertyChanging();
+					this._OrderTotal = value;
+					this.SendPropertyChanged("OrderTotal");
+					this.OnOrderTotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_CustomerOrder", Storage="_Customer", ThisKey="IDCustomer", OtherKey="IDCustomer", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.CustomerOrders.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerOrders.Add(this);
+						this._IDCustomer = value.IDCustomer;
+					}
+					else
+					{
+						this._IDCustomer = default(System.Guid);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OrderChart_CustomerOrder", Storage="_OrderChart", ThisKey="IDCustomerOrder", OtherKey="IDOrderChart", IsForeignKey=true)]
+		public OrderChart OrderChart
+		{
+			get
+			{
+				return this._OrderChart.Entity;
+			}
+			set
+			{
+				OrderChart previousValue = this._OrderChart.Entity;
+				if (((previousValue != value) 
+							|| (this._OrderChart.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OrderChart.Entity = null;
+						previousValue.CustomerOrder = null;
+					}
+					this._OrderChart.Entity = value;
+					if ((value != null))
+					{
+						value.CustomerOrder = this;
+						this._IDCustomerOrder = value.IDOrderChart;
+					}
+					else
+					{
+						this._IDCustomerOrder = default(System.Guid);
+					}
+					this.SendPropertyChanged("OrderChart");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Customers")]
 	public partial class Customer : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -617,7 +645,7 @@ namespace RomaniaRoadie.Models.DBObjects
 		
 		private string _LastName;
 		
-		private EntityRef<CustomerOrder> _CustomerOrder;
+		private EntitySet<CustomerOrder> _CustomerOrders;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -637,7 +665,7 @@ namespace RomaniaRoadie.Models.DBObjects
 		
 		public Customer()
 		{
-			this._CustomerOrder = default(EntityRef<CustomerOrder>);
+			this._CustomerOrders = new EntitySet<CustomerOrder>(new Action<CustomerOrder>(this.attach_CustomerOrders), new Action<CustomerOrder>(this.detach_CustomerOrders));
 			OnCreated();
 		}
 		
@@ -741,32 +769,16 @@ namespace RomaniaRoadie.Models.DBObjects
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_CustomerOrder", Storage="_CustomerOrder", ThisKey="IDCustomer", OtherKey="IDCustomerOrder", IsUnique=true, IsForeignKey=false)]
-		public CustomerOrder CustomerOrder
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_CustomerOrder", Storage="_CustomerOrders", ThisKey="IDCustomer", OtherKey="IDCustomer")]
+		public EntitySet<CustomerOrder> CustomerOrders
 		{
 			get
 			{
-				return this._CustomerOrder.Entity;
+				return this._CustomerOrders;
 			}
 			set
 			{
-				CustomerOrder previousValue = this._CustomerOrder.Entity;
-				if (((previousValue != value) 
-							|| (this._CustomerOrder.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._CustomerOrder.Entity = null;
-						previousValue.Customer = null;
-					}
-					this._CustomerOrder.Entity = value;
-					if ((value != null))
-					{
-						value.Customer = this;
-					}
-					this.SendPropertyChanged("CustomerOrder");
-				}
+				this._CustomerOrders.Assign(value);
 			}
 		}
 		
@@ -788,6 +800,18 @@ namespace RomaniaRoadie.Models.DBObjects
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_CustomerOrders(CustomerOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = this;
+		}
+		
+		private void detach_CustomerOrders(CustomerOrder entity)
+		{
+			this.SendPropertyChanging();
+			entity.Customer = null;
 		}
 	}
 	

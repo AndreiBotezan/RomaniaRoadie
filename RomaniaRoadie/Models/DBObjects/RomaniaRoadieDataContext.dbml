@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RomaniaRoadie" Class="RomaniaRoadieDataContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=RomaniaRoadie;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="RomaniaRoadieConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.CustomerOrders" Member="CustomerOrders">
-    <Type Name="CustomerOrder">
-      <Column Name="IDCustomerOrder" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Adress" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
-      <Column Name="City" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
-      <Column Name="State" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Details" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_CustomerOrder" Member="Customer" ThisKey="IDCustomerOrder" OtherKey="IDCustomer" Type="Customer" IsForeignKey="true" />
-      <Association Name="OrderChart_CustomerOrder" Member="OrderChart" ThisKey="IDCustomerOrder" OtherKey="IDOrderChart" Type="OrderChart" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Products" Member="Products">
     <Type Name="Product">
       <Column Name="IDProduct" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -24,6 +10,21 @@
       <Association Name="Product_OrderChart" Member="OrderCharts" ThisKey="IDProduct" OtherKey="IDProduct" Type="OrderChart" />
     </Type>
   </Table>
+  <Table Name="dbo.CustomerOrders" Member="CustomerOrders">
+    <Type Name="CustomerOrder">
+      <Column Name="IDCustomerOrder" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Adress" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Details" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="OrderTotal" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerOrder" Member="Customer" ThisKey="IDCustomer" OtherKey="IDCustomer" Type="Customer" IsForeignKey="true" />
+      <Association Name="OrderChart_CustomerOrder" Member="OrderChart" ThisKey="IDCustomerOrder" OtherKey="IDOrderChart" Type="OrderChart" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Customers" Member="Customers">
     <Type Name="Customer">
       <Column Name="IDCustomer" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -31,7 +32,7 @@
       <Column Name="Email" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_CustomerOrder" Member="CustomerOrder" ThisKey="IDCustomer" OtherKey="IDCustomerOrder" Type="CustomerOrder" Cardinality="One" />
+      <Association Name="Customer_CustomerOrder" Member="CustomerOrders" ThisKey="IDCustomer" OtherKey="IDCustomer" Type="CustomerOrder" />
     </Type>
   </Table>
   <Table Name="dbo.OrderCharts" Member="OrderCharts">

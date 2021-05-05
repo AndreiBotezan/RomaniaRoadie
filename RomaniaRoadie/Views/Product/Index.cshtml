@@ -10,54 +10,52 @@
 <p>
     @if (User.IsInRole("Admin"))
     {
-       @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create")
     }
 </p>
 <table class="table">
     <tr>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.Manufacturer)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Model)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Manufacturer)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Model)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.ActionLink("Add to Cart", "Create", "OrderChart", new { id = item.IDProduct }, null) |
-        @Html.ActionLink("Details", "Details", new { id = item.IDProduct }) 
-    </td>
-        @if(User.IsInRole("Admin"))
-        {
+    @foreach (var item in Model)
+    {
+        <tr>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IDProduct }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IDProduct })
-            </td> 
-        }
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
 
-</tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Add to Cart", "Create", "OrderChart", new { id = item.IDProduct }, null) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDProduct })
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDProduct }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDProduct })
+                </td>
+
+            }
+
+        </tr>
+    }
 
 </table>

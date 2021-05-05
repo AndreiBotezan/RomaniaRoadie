@@ -109,7 +109,46 @@ namespace RomaniaRoadie.Repository
         }
         public Guid GetLastOrder()
         {
-            return dbContext.OrderCharts.OrderByDescending(x => x.IDOrderChart).FirstOrDefault().IDCustomerOrder;
+            return dbContext.OrderCharts.OrderByDescending(x => x.IDOrderChart)
+                .FirstOrDefault().IDCustomerOrder;
+        }
+        /*public Guid GetLastCustomerOrder()
+        {
+            return dbContext.CustomerOrders.OrderByDescending(x => x.IDCustomerOrder)
+                .FirstOrDefault().IDCustomerOrder;
+
+        }*/
+        public decimal GetOrderTotal(Guid IDCustomers)
+        {
+            var decimalTotal = 0M;
+            var check = false;
+            var y = dbContext.CustomerOrders.OrderByDescending(x => x.IDCustomerOrder).FirstOrDefault();
+            Guid? test = null;
+            if (y != null)
+            {
+                test = y.IDCustomerOrder;
+            }
+            List<OrderChartModel> orderChartModels = GetAllOrderCharts(IDCustomers);
+
+            foreach (var item in orderChartModels)
+            {
+                if (test != null)
+                {
+                    if (check == true)
+                    {
+                        decimalTotal += item.TotalPrice;
+                    }
+                    if (item.IDCustomerOrder == test)
+                    {
+                        check = true;
+                    }
+                }
+                else
+                {
+                    decimalTotal += item.TotalPrice;
+                }
+            }
+            return decimalTotal;
         }
     }
 }

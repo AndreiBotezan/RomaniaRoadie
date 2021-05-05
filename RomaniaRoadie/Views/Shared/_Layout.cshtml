@@ -28,14 +28,14 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Order", "Index", "OrderChart")</li>
+                        <li>@Html.ActionLink("Cart", "Index", "OrderChart")</li>
 
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
                         }
                         
-                        <li>@Html.ActionLink("Last Orders", "Index", "CustomerOrder")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "CustomerOrder")</li>
                     }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 

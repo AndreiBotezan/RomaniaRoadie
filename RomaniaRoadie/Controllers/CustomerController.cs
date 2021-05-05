@@ -2,8 +2,6 @@
 using RomaniaRoadie.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RomaniaRoadie.Controllers
@@ -13,7 +11,7 @@ namespace RomaniaRoadie.Controllers
         private CustomerRepository customerRepository = new CustomerRepository();
 
         // GET: Customer
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             List<CustomerModel> customers = customerRepository.GetAllCustomers();
@@ -22,11 +20,11 @@ namespace RomaniaRoadie.Controllers
         }
 
         // GET: Customer/Details/5
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(Guid id)
         {
             CustomerModel customerModel = customerRepository.GetCustomerByID(id);
-            
+
             return View("CustomerDetails", customerModel);
         }
 
@@ -38,7 +36,7 @@ namespace RomaniaRoadie.Controllers
         }
 
         // POST: Customer/Create
-        [Authorize(Roles="User, Admin")]
+        [Authorize(Roles = "User, Admin")]
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -46,9 +44,9 @@ namespace RomaniaRoadie.Controllers
             {
                 CustomerModel customerModel = new CustomerModel();
                 UpdateModel(customerModel);
-                
+
                 customerRepository.InsertCustomer(customerModel);
-                
+
                 return RedirectToAction("Index");
             }
             catch
@@ -61,7 +59,7 @@ namespace RomaniaRoadie.Controllers
         [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(Guid id)
         {
-            CustomerModel customerModel = customerRepository.GetCustomerByID(id); 
+            CustomerModel customerModel = customerRepository.GetCustomerByID(id);
             return View("EditCustomer", customerModel);
         }
 

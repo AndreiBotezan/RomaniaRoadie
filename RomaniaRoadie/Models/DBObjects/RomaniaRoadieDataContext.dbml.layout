@@ -2,49 +2,49 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="RomaniaRoadieDataContext">
   <DataContextMoniker Name="/RomaniaRoadieDataContextDataContext" />
   <nestedChildShapes>
-    <classShape Id="2760b02e-c8c8-41b7-8702-051b7dff87b1" absoluteBounds="6.25, 1, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/RomaniaRoadieDataContextDataContext/CustomerOrder" />
-      <nestedChildShapes>
-        <elementListCompartment Id="50dd5def-0737-497c-8a1a-e1035d2e8dd2" absoluteBounds="6.265, 1.46, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="39725833-109d-4ace-aeeb-5652b3ea4ab5" absoluteBounds="0.75, 1.25, 2, 1.7708968098958329">
+    <classShape Id="001f9c10-8f0e-4784-8941-96cbfef658a5" absoluteBounds="0.75, 1.375, 2, 1.7708968098958329">
       <DataClassMoniker Name="/RomaniaRoadieDataContextDataContext/Product" />
       <nestedChildShapes>
-        <elementListCompartment Id="d1ebfcb1-9c21-4ca8-a688-882e539a1670" absoluteBounds="0.765, 1.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="095d7e16-e9e1-46b1-969c-cf3c61a8fbb1" absoluteBounds="0.765, 1.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="57398c45-9df9-4157-95d9-f2f32dd3a9d8" absoluteBounds="3.5, 5.25, 2, 1.7708968098958327">
+    <classShape Id="725fec4a-0af8-4b55-8832-fb24df8f9f9a" absoluteBounds="6.25, 1, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/RomaniaRoadieDataContextDataContext/CustomerOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e1816dca-b909-4b94-bf5a-44330fd33399" absoluteBounds="6.265, 1.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2ce76748-6ccb-4527-806e-4e276ae1957f" absoluteBounds="3.5, 5.375, 2, 1.7708968098958327">
       <DataClassMoniker Name="/RomaniaRoadieDataContextDataContext/Customer" />
       <nestedChildShapes>
-        <elementListCompartment Id="ea789cfa-d647-4d5b-89e7-adf0f450c62a" absoluteBounds="3.515, 5.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9b1e4acd-5470-4d1b-9a5e-86c2a7a5ffb9" absoluteBounds="3.515, 5.835, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="1e6ba4da-ddd0-452b-a7ac-3b539d3ff3b3" absoluteBounds="3.5, 1.125, 2, 1.9631982421875003">
+    <classShape Id="fbba2516-ef09-4ed1-b47b-8cb13a92a9d6" absoluteBounds="3.5, 1.25, 2, 1.9631982421875003">
       <DataClassMoniker Name="/RomaniaRoadieDataContextDataContext/OrderChart" />
       <nestedChildShapes>
-        <elementListCompartment Id="d6e70d7c-18be-4324-9c8e-5fce009967a5" absoluteBounds="3.515, 1.585, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="da1e0408-8b05-4641-b488-ac6e1cd1c416" absoluteBounds="3.515, 1.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 6.13544840494792); (7.25 : 6.13544840494792); (7.25 : 3.34780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 6.26044840494792); (7.25 : 6.26044840494792); (7.25 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/RomaniaRoadieDataContextDataContext/Customer/Customer_CustomerOrder" />
       <nodes>
-        <classShapeMoniker Id="57398c45-9df9-4157-95d9-f2f32dd3a9d8" />
-        <classShapeMoniker Id="2760b02e-c8c8-41b7-8702-051b7dff87b1" />
+        <classShapeMoniker Id="2ce76748-6ccb-4527-806e-4e276ae1957f" />
+        <classShapeMoniker Id="725fec4a-0af8-4b55-8832-fb24df8f9f9a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.10659912109375); (6.25 : 2.10659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.23159912109375); (6.25 : 2.23159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/RomaniaRoadieDataContextDataContext/OrderChart/OrderChart_CustomerOrder" />
       <nodes>
-        <classShapeMoniker Id="1e6ba4da-ddd0-452b-a7ac-3b539d3ff3b3" />
-        <classShapeMoniker Id="2760b02e-c8c8-41b7-8702-051b7dff87b1" />
+        <classShapeMoniker Id="fbba2516-ef09-4ed1-b47b-8cb13a92a9d6" />
+        <classShapeMoniker Id="725fec4a-0af8-4b55-8832-fb24df8f9f9a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.13544840494792); (3.5 : 2.13544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 2.26044840494792); (3.5 : 2.26044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/RomaniaRoadieDataContextDataContext/Product/Product_OrderChart" />
       <nodes>
-        <classShapeMoniker Id="39725833-109d-4ace-aeeb-5652b3ea4ab5" />
-        <classShapeMoniker Id="1e6ba4da-ddd0-452b-a7ac-3b539d3ff3b3" />
+        <classShapeMoniker Id="001f9c10-8f0e-4784-8941-96cbfef658a5" />
+        <classShapeMoniker Id="fbba2516-ef09-4ed1-b47b-8cb13a92a9d6" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -9,12 +9,10 @@ namespace RomaniaRoadie.Repository
     public class CustomerRepository
     {
         private RomaniaRoadieDataContextDataContext dbContext;
-
         public CustomerRepository()
         {
             dbContext = new RomaniaRoadieDataContextDataContext();
         }
-
         public CustomerRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;

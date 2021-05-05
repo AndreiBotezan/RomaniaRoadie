@@ -202,6 +202,7 @@
       <DependentUpon>RomaniaRoadieDataContext.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderChartModel.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CustomerOrderRepository.cs" />
@@ -280,7 +281,6 @@
     <Content Include="Views\Customer\CreateCustomer.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\OrderChart\CreateOrderChart.cshtml" />
-    <Content Include="Views\OrderChart\Index.cshtml" />
     <Content Include="Views\CustomerOrder\CreateCustomerOrder.cshtml" />
     <Content Include="Views\CustomerOrder\Index.cshtml" />
     <Content Include="Views\Product\CreateProduct.cshtml" />
@@ -297,6 +297,7 @@
     <Content Include="Views\CustomerOrder\CustomerOrderDetails.cshtml" />
     <Content Include="Views\OrderChart\OrderChartDetails.cshtml" />
     <Content Include="Views\Customer\CustomerDetails.cshtml" />
+    <Content Include="Views\OrderChart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

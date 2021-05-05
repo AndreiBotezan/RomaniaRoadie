@@ -12,8 +12,6 @@ namespace RomaniaRoadie.Models
 
         [Required(ErrorMessage = "Mandatory field")]
         public int Quantity { get; set; }
-
-        [Required(ErrorMessage = "Mandatory field")]
         public decimal TotalPrice { get; set; }
     }
 }

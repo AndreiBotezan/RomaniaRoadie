@@ -14,7 +14,6 @@ namespace RomaniaRoadie.Repository
         {
             dbContext = new RomaniaRoadieDataContextDataContext();
         }
-
         public ProductRepository(RomaniaRoadieDataContextDataContext _dbContext)
         {
             dbContext = _dbContext;
@@ -28,7 +27,6 @@ namespace RomaniaRoadie.Repository
             }
             return productsList;
         }
-
         public ProductModel GetProductByID(Guid IDProduct)
         {
             var product = dbContext.Products.FirstOrDefault(x => x.IDProduct == IDProduct);
@@ -67,8 +65,7 @@ namespace RomaniaRoadie.Repository
         }
         public void DeleteProduct(Guid ID)
         {
-            Product dbProduct = dbContext.Products
-               .FirstOrDefault(x => x.IDProduct == ID);
+            Product dbProduct = dbContext.Products.FirstOrDefault(x => x.IDProduct == ID);
             if (dbProduct != null)
             {
                 dbContext.Products.DeleteOnSubmit(dbProduct);
